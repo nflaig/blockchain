@@ -43,6 +43,9 @@ class Blockchain:
             'transactions': transactions_of_block
         }
 
+        # Reset the mempool
+        self.mempool.current_transactions = []
+
         # Add the new block to the end of the chain
         self.chain.append(block)
 
@@ -197,7 +200,10 @@ class Blockchain:
         signature = signed_transaction['signature']
 
         # Get the public key of the sender which is needed for the verification
-        public_key_sender = ecdsa_recover(transaction_hash, signature)
+        try:
+            public_key_sender = ecdsa_recover(transaction_hash, signature)
+        except:
+            return False
 
         return ecdsa_verify(transaction_hash, signature, public_key_sender)
 

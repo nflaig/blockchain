@@ -40,6 +40,13 @@ class Mempool:
         :param blockchain: <object> Blockchain object
         :return: <bool> True if the transaction is valid, False if not
         """
+
+        # Check if the amount of coins to send is negative
+        amount = signed_transaction['amount']
+
+        if amount < 0:
+            return False
+
         sender = signed_transaction['sender']
 
         # Check if a transaction of the sender already exists in the mempool

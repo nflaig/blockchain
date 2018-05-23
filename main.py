@@ -107,9 +107,6 @@ def mine():
     transactions_of_block = blockchain.mempool.current_transactions
     transactions_of_block.append(coinbase_transaction)
 
-    # Reset the mempool
-    blockchain.mempool.current_transactions = []
-
     # Run the Proof of Work algorithm to find a valid nonce for the block
     previous_block = blockchain.last_block
     previous_block_hash = blockchain.hash(previous_block)

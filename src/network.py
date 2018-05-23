@@ -13,4 +13,6 @@ class Network:
         """
 
         parsed_url = urlparse(address)
-        self.nodes.add(parsed_url.netloc)
+
+        if parsed_url.netloc:
+            self.nodes.add(parsed_url.netloc)
